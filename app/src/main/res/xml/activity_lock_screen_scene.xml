@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+<!--    <Transition-->
+<!--        motion:constraintSetEnd="@+id/image2"-->
+<!--        motion:constraintSetStart="@id/image3"-->
+<!--        motion:duration="1000">-->
+<!--        <KeyFrameSet>-->
+<!--        </KeyFrameSet>-->
+<!--        <OnSwipe-->
+<!--            motion:touchAnchorId="@+id/swipeView"-->
+<!--            motion:dragDirection="dragRight"-->
+<!--            motion:touchAnchorSide="right" />-->
+<!--    </Transition>-->
+
+<!--    <ConstraintSet android:id="@+id/image3">-->
+<!--        <Constraint-->
+<!--            android:id="@+id/check"-->
+<!--            motion:layout_constraintEnd_toEndOf="@+id/unlockBase"-->
+<!--            android:layout_width="48dp"-->
+<!--            android:layout_height="48dp"-->
+<!--            motion:layout_constraintBottom_toBottomOf="@id/unlockBase"-->
+<!--            android:layout_marginEnd="10dp"-->
+<!--            motion:layout_constraintTop_toTopOf="@id/unlockBase"-->
+<!--            android:scaleX="0"-->
+<!--            android:scaleY="0"-->
+<!--            android:alpha="0" />-->
+<!--        <Constraint-->
+<!--            android:id="@+id/swipeView"-->
+<!--            android:layout_width="80dp"-->
+<!--            android:layout_height="80dp"-->
+<!--            motion:layout_constraintBottom_toBottomOf="@id/unlockBase"-->
+<!--            android:layout_marginStart="20dp"-->
+<!--            motion:layout_constraintTop_toTopOf="@id/unlockBase"-->
+<!--            motion:layout_constraintStart_toStartOf="parent" >-->
+<!--            <CustomAttribute-->
+<!--                motion:attributeName="cardBackgroundColor"-->
+<!--                motion:customColorValue="@color/mainOrange" />-->
+<!--        </Constraint>-->
+<!--    </ConstraintSet>-->
+
+    <ConstraintSet android:id="@+id/image2">
+        <Constraint
+            android:id="@+id/unlockTitle"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toTopOf="@id/unlockBase"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintBottom_toBottomOf="@id/unlockBase"
+            android:scaleX="0"
+            android:scaleY="0" />
+        <Constraint
+            android:id="@+id/unlockFill"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            motion:layout_constraintBottom_toBottomOf="@id/swipeView"
+            android:layout_marginStart="20dp"
+            motion:layout_constraintTop_toTopOf="@+id/swipeView"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintEnd_toEndOf="@+id/unlockBase" />
+        <Constraint
+            android:id="@+id/swipeView"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintLeft_toLeftOf="parent"
+            android:layout_margin="@dimen/_24cdp"
+            >
+            <CustomAttribute
+                motion:attributeName="cardBackgroundColor"
+                motion:customColorValue="@color/mainOrange" />
+        </Constraint>
+    </ConstraintSet>
+    <ConstraintSet
+        android:id="@+id/unlocked"
+        motion:deriveConstraintsFrom="@+id/image2" >
+
+        <Constraint
+            android:id="@+id/check"
+            motion:layout_constraintEnd_toEndOf="@+id/unlockBase"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintLeft_toLeftOf="parent"
+            android:layout_margin="@dimen/_24cdp"
+
+            android:scaleX="0"
+            android:scaleY="0" />
+    </ConstraintSet>
+
+    <Transition
+        motion:constraintSetStart="@+id/image2"
+        motion:constraintSetEnd="@+id/unlocked"
+        motion:autoTransition="animateToEnd"
+        motion:duration="300"/>
+</MotionScene>

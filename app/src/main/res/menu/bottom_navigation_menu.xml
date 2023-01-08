@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view"
+    >
+
+    <group android:checkableBehavior="single">
+
+
+        <item
+            android:id="@+id/settingFragment"
+            android:icon="@drawable/icons_settings"
+            android:iconTint="@color/white"
+            android:title="تنظیمات"
+            app:itemTextAppearance="@style/fontForMenu"
+
+            />
+
+
+        <item
+            android:id="@+id/favouriteFragment"
+            android:icon="@drawable/icons_favorite"
+            android:iconTint="@color/white"
+            android:title="مورد علاقه ها"
+            app:itemTextAppearance="@style/fontForMenu"
+
+
+            />
+
+        <item
+            android:id="@+id/categorizeFrahment"
+            android:icon="@drawable/icons_categorize"
+            android:iconTint="@color/white"
+            android:title="طبقه بندی"
+            app:itemTextAppearance="@style/fontForMenu"
+
+
+            />
+
+
+        <item
+            android:id="@+id/homeFragment"
+            android:icon="@drawable/icons_home_page"
+            android:iconTint="@color/white"
+            android:title="خانه"
+            app:itemTextAppearance="@style/fontForMenu"
+
+
+            />
+
+
+    </group>
+
+
+</menu>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:cardCornerRadius="@dimen/_12cdp"
+        android:layout_margin="@dimen/_24cdp"
+        >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@color/mainBlack"
+            android:orientation="vertical"
+            android:padding="@dimen/_24cdp"
+
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:paddingVertical="@dimen/_12cdp"
+                >
+
+                <TextView
+                    style="@style/fontForBigWhite"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="انتخاب برای پس زمینه:" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:paddingVertical="@dimen/_12cdp"
+
+                >
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/home_screen_set"
+                    style="@style/fontForNormalWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginHorizontal="@dimen/_24cdp"
+                    android:paddingVertical="@dimen/_8cdp"
+                    android:text="صفحه اصلی"
+                    app:cornerRadius="@dimen/_8cdp"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:paddingVertical="@dimen/_12cdp"
+
+                >
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/lock_screen_set"
+                    style="@style/fontForNormalWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginHorizontal="@dimen/_24cdp"
+                    android:paddingVertical="@dimen/_8cdp"
+                    app:cornerRadius="@dimen/_8cdp"
+
+
+                    android:text="صفحه قفل" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:paddingVertical="@dimen/_12cdp"
+
+                >
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/both_screen_set"
+                    style="@style/fontForNormalWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginHorizontal="@dimen/_24cdp"
+                    android:paddingVertical="@dimen/_8cdp"
+                    app:cornerRadius="@dimen/_8cdp"
+
+
+                    android:text="هردو" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

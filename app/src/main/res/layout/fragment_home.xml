@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainGray"
+    android:id="@+id/swip_home"
+    tools:context=".fragments.HomeFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view_main"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_12cdp"
+                android:layout_marginTop="@dimen/_24cdp"
+                android:layout_marginBottom="@dimen/_8cdp"
+                android:background="@drawable/bottom_navigation_back">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/mainOrange"
+                    android:textColorHint="@color/mainGray"
+                    app:boxStrokeColor="@color/outlined_box"
+                    app:hintTextColor="@color/mainOrange"
+                    android:layout_margin="@dimen/_8cdp"
+                    app:boxCornerRadiusBottomEnd="@dimen/_18cdp"
+                    app:boxCornerRadiusBottomStart="@dimen/_18cdp"
+                    app:boxCornerRadiusTopEnd="@dimen/_18cdp"
+                    app:boxCornerRadiusTopStart="@dimen/_18cdp"
+
+                    android:layout_centerInParent="true"
+
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/mainOrange"
+                        android:hint="جستجو"
+                        android:imeOptions="actionDone"
+                        android:textColor="@color/white"
+                        android:textColorHighlight="@color/mainOrange"
+                        android:textColorHint="@color/mainOrange"
+                        android:gravity="start"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:inputType="text"
+                        android:scrollHorizontally="true"
+                        android:drawableStart="@drawable/ic_baseline_search_24"
+                        android:drawableTint="@color/outlined_box"
+                        />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rec_sugg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4cdp"
+                android:layout_marginBottom="@dimen/_24cdp" />
+
+
+            <include
+                android:id="@+id/included_all_photos"
+                layout="@layout/list_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

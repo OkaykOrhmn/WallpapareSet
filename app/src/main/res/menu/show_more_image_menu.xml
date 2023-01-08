@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+
+
+    <item
+        android:icon="@drawable/icons_settings"
+        android:title="دانلود"
+        android:iconTint="@color/white"
+        app:itemTextAppearance="@style/fontForMenu"
+        >
+
+        <menu>
+            <item
+
+                android:title="دانلود"
+                app:itemTextAppearance="@style/fontForMenu"
+                />
+            <item
+
+                android:title="دانلود"
+                app:itemTextAppearance="@style/fontForMenu"
+                />
+        </menu>
+    </item>
+
+
+    <item
+        android:id="@+id/categorizeFrahment"
+        android:icon="@drawable/ic_baseline_favorite_border_24"
+        android:title="اضافه به علاقه مندی ها"
+        android:iconTint="@color/white"
+        app:itemTextAppearance="@style/fontForMenu"
+
+
+
+        />
+
+        <item
+            android:id="@+id/favouriteFragment"
+            android:icon="@drawable/icons_settings"
+            android:title="اشتراک گذاری"
+            android:iconTint="@color/white"
+            app:itemTextAppearance="@style/fontForMenu"
+
+
+
+
+            />
+
+
+
+
+</menu>

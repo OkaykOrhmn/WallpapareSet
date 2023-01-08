@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".fragments.CategorizeFragment">
+
+
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/a"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/mainGray"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/_24cdp"
+                android:paddingTop="@dimen/_4cdp"
+
+
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="پیدا کردن بر اساس رنگ"
+                    android:layout_gravity="right"
+                    style="@style/fontForHeaderBlack"
+                    android:layout_marginRight="@dimen/_12cdp"
+                    android:layout_marginTop="@dimen/_12cdp"
+                    android:layout_marginBottom="@dimen/_8cdp"
+                    />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rec_colors"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    />
+
+
+            </LinearLayout>
+
+
+            <include
+                android:id="@+id/included_cat"
+                layout="@layout/list_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+
+
+        </LinearLayout>
+
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>
