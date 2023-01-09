@@ -1,34 +1,28 @@
-package com.example.wallpapareset.fragments;
+package com.example.wallpapareset.fragments.home;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.wallpapareset.adapter.AllAdapter;
 import com.example.wallpapareset.R;
-import com.example.wallpapareset.adapter.Suggestions;
-import com.example.wallpapareset.adapter.SuggestionsAdapter;
+import com.example.wallpapareset.models.model.Suggestions;
 import com.example.wallpapareset.databinding.FragmentHomeBinding;
+import com.example.wallpapareset.fragments.home.adapter.AllAdapter;
+import com.example.wallpapareset.fragments.home.adapter.SuggestionsAdapter;
 
 import java.util.ArrayList;
 

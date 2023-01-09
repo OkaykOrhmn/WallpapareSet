@@ -1,4 +1,4 @@
-package com.example.wallpapareset.adapter;
+package com.example.wallpapareset.fragments.home.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -15,6 +15,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wallpapareset.R;
+import com.example.wallpapareset.models.model.Suggestions;
 
 import java.util.ArrayList;
 

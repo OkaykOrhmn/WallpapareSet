@@ -1,4 +1,4 @@
-package com.example.wallpapareset.fragments;
+package com.example.wallpapareset.fragments.layouts;
 
 import android.os.Bundle;
 
@@ -12,10 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.wallpapareset.R;
-import com.example.wallpapareset.adapter.AllAdapter;
-import com.example.wallpapareset.adapter.Suggestions;
-import com.example.wallpapareset.adapter.SuggestionsAdapter;
-import com.example.wallpapareset.databinding.FragmentHomeBinding;
+import com.example.wallpapareset.fragments.home.adapter.AllAdapter;
 import com.example.wallpapareset.databinding.FragmentListBinding;
 
 import java.util.ArrayList;

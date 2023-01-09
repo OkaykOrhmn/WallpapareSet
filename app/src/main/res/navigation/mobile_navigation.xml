@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.wallpapareset.fragments.HomeFragment"
+        android:name="com.example.wallpapareset.fragments.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
 
@@ -18,17 +18,17 @@
         app:destination="@id/photoPageFragment" />
     <fragment
         android:id="@+id/favouriteFragment"
-        android:name="com.example.wallpapareset.fragments.FavouriteFragment"
+        android:name="com.example.wallpapareset.fragments.favourite.FavouriteFragment"
         android:label="fragment_favourite"
         tools:layout="@layout/fragment_favourite" />
     <fragment
         android:id="@+id/settingFragment"
-        android:name="com.example.wallpapareset.fragments.SettingFragment"
+        android:name="com.example.wallpapareset.fragments.settingFragment.SettingFragment"
         android:label="fragment_setting"
         tools:layout="@layout/fragment_setting" />
     <fragment
         android:id="@+id/categorizeFrahment"
-        android:name="com.example.wallpapareset.fragments.CategorizeFragment"
+        android:name="com.example.wallpapareset.fragments.categorize.CategorizeFragment"
         android:label="fragment_categorize_frahment"
         tools:layout="@layout/fragment_categorize" >
 
@@ -39,7 +39,7 @@
         app:destination="@id/listFragment" />
     <fragment
         android:id="@+id/photoPageFragment"
-        android:name="com.example.wallpapareset.fragments.PhotoPageFragment"
+        android:name="com.example.wallpapareset.fragments.layouts.PhotoPageFragment"
         android:label="fragment_photo_page"
         tools:layout="@layout/fragment_photo_page" >
 
@@ -55,7 +55,7 @@
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.wallpapareset.fragments.ListFragment"
+        android:name="com.example.wallpapareset.fragments.layouts.ListFragment"
         android:label="fragment_list"
         tools:layout="@layout/fragment_list" />
 </navigation>

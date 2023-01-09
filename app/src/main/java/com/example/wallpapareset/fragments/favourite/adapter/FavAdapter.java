@@ -1,4 +1,4 @@
-package com.example.wallpapareset.adapter;
+package com.example.wallpapareset.fragments.favourite.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -15,43 +15,44 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wallpapareset.R;
+import com.example.wallpapareset.models.model.Photo;
 
 import java.util.ArrayList;
 
-public class AllAdapter extends RecyclerView.Adapter<AllAdapter.MyView>{
+public class FavAdapter extends RecyclerView.Adapter<FavAdapter.MyView> {
 
     private Context context;
-    private ArrayList<Integer> suggestions;
+    private ArrayList<Photo> suggestions;
     private String title;
 
-    public AllAdapter(ArrayList<Integer> suggestions, String title){
-        this.suggestions=suggestions;
-        this.title=title;
+    public FavAdapter(ArrayList<Photo> suggestions, String title) {
+        this.suggestions = suggestions;
+        this.title = title;
     }
 
     @NonNull
     @Override
-    public AllAdapter.MyView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FavAdapter.MyView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
         View itemview = LayoutInflater.from(parent.getContext()).inflate(R.layout.all, parent, false);
-        return new AllAdapter.MyView(itemview);    }
+        return new FavAdapter.MyView(itemview);
+    }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
-    public void onBindViewHolder(@NonNull AllAdapter.MyView holder, int position) {
-        holder.icon.setImageResource(suggestions.get(position));
-        if (position == 0){
+    public void onBindViewHolder(@NonNull FavAdapter.MyView holder, int position) {
+        holder.icon.setImageResource(suggestions.get(position).address);
+        if (position == 0) {
             holder.name.setText(title);
             holder.icon.setClickable(false);
-        }else{
+        } else {
             holder.icon.setOnClickListener(view -> {
                 Bundle bundle = new Bundle();
-                bundle.putInt("photo", suggestions.get(position));
-                bundle.putInt("id", position);
+                bundle.putInt("photo", suggestions.get(position).address);
+                bundle.putInt("id", suggestions.get(position).id);
                 Navigation.findNavController(view).navigate(R.id.action_to_photoPageFragment, bundle);
             });
         }
-
 
 
     }
@@ -73,8 +74,6 @@ public class AllAdapter extends RecyclerView.Adapter<AllAdapter.MyView>{
             name = itemView.findViewById(R.id.name);
 
 
-
         }
     }
-
 }

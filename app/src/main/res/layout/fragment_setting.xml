@@ -1,11 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.SettingFragment"
-    android:background="@color/mainGray"
+    tools:context=".fragments.settingFragment.SettingFragment"
     >
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/a"
 
-</FrameLayout>
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_32cdp"
+                android:background="@color/mainGray"
+                android:paddingTop="@dimen/_4cdp"
+                android:paddingBottom="@dimen/_12cdp"
+                />
+            <include
+                layout="@layout/list_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/included_setting"
+                />
+        </LinearLayout>
+
+
+
+    </androidx.core.widget.NestedScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mainGray"
+        android:visibility="invisible"
+        android:id="@+id/alarm_layout"
+
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/fontForHeaderBlack"
+            android:layout_centerInParent="true"
+            android:id="@+id/alarm"
+            android:gravity="center"
+            android:layout_margin="@dimen/_12cdp"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_permisions"
+            style="@style/fontForNormalWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/alarm"
+            android:layout_centerHorizontal="true"
+            android:text="رفتن به تنظیمات" />
+
+
+    </RelativeLayout>
+
+
+
+
+
+</RelativeLayout>

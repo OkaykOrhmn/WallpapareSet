@@ -1,11 +1,9 @@
-package com.example.wallpapareset.fragments;
+package com.example.wallpapareset.fragments.favourite;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.util.Log;
@@ -14,11 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.wallpapareset.R;
-import com.example.wallpapareset.adapter.FavAdapter;
-import com.example.wallpapareset.adapter.Photo;
-import com.example.wallpapareset.adapter.SuggestionsAdapter;
+import com.example.wallpapareset.models.model.Photo;
 import com.example.wallpapareset.database.SqlFav;
 import com.example.wallpapareset.databinding.FragmentFavouriteBinding;
+import com.example.wallpapareset.fragments.favourite.adapter.FavAdapter;
 
 import java.util.ArrayList;
 

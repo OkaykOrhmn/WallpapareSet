@@ -1,4 +1,4 @@
-package com.example.wallpapareset.fragments;
+package com.example.wallpapareset.fragments.categorize;
 
 import android.os.Bundle;
 
@@ -12,13 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.wallpapareset.R;
-import com.example.wallpapareset.adapter.AllAdapter;
-import com.example.wallpapareset.adapter.CategorizeAdapter;
-import com.example.wallpapareset.adapter.ColorAdapter;
-import com.example.wallpapareset.adapter.Suggestions;
-import com.example.wallpapareset.adapter.SuggestionsAdapter;
+import com.example.wallpapareset.models.model.Suggestions;
 import com.example.wallpapareset.databinding.FragmentCategorizeBinding;
-import com.example.wallpapareset.databinding.FragmentHomeBinding;
+import com.example.wallpapareset.fragments.categorize.adapter.CategorizeAdapter;
+import com.example.wallpapareset.fragments.categorize.adapter.ColorAdapter;
 
 import java.util.ArrayList;
 

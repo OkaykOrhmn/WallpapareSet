@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parent_view_toast"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layoutDirection="rtl"
+    app:cardBackgroundColor="@color/mainBlack"
+    app:cardElevation="0dp"
+    app:cardCornerRadius="@dimen/_12cdp"
+
+
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_46cdp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingVertical="@dimen/_8cdp"
+        android:paddingHorizontal="@dimen/_18cdp"
+        >
+
+
+        <TextView
+            android:id="@+id/title_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="توست خطا"
+            style="@style/fontForNormalWhite"
+            />
+
+        <View
+            android:layout_width="@dimen/_32cdp"
+            android:layout_height="1dp"
+            />
+
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="رفتن به تنظیمات"
+            style="@style/fontForSmallWhite"
+            app:cornerRadius="@dimen/_12cdp"
+            />
+
+
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

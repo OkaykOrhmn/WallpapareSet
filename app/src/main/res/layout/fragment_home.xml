@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/mainGray"
     android:id="@+id/swip_home"
-    tools:context=".fragments.HomeFragment">
+    tools:context=".fragments.home.HomeFragment">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll_view_main"

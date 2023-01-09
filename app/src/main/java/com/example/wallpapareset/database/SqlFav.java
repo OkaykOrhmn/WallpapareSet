@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.example.wallpapareset.adapter.Photo;
+import com.example.wallpapareset.models.model.Photo;
 
 import java.util.ArrayList;
 
