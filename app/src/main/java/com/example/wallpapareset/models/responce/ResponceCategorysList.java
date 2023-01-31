@@ -13,7 +13,7 @@ public class ResponceCategorysList {
     public boolean has_next = false;
 
     @SerializedName("page_next")
-    public String page_next = "";
+    public int page_next = 0;
 
     @SerializedName("has_previous")
     public boolean has_previous = false;

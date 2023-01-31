@@ -1,6 +1,7 @@
 package com.example.wallpapareset.fragments.layouts;
 
 import android.app.Dialog;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.wallpapareset.R;
+import com.example.wallpapareset.models.responce.ResponceCategorysList;
 import com.example.wallpapareset.models.responce.Wallpapares;
 import com.example.wallpapareset.fragments.categorize.CategorizeListViewModel;
 import com.example.wallpapareset.fragments.home.adapter.AllAdapter;
@@ -30,11 +32,12 @@ public class ListFragment extends Fragment {
     private FragmentListBinding binding;
     private AllAdapter allAdapter;
     private ArrayList<Wallpapares> all = new ArrayList<>();
-    private String title ;
-    private int background ;
+    private String title;
+    private int background;
     private CategorizeListViewModel listsViewModel;
-
-
+    private boolean isNextPage;
+    private int page;
+    private ArrayList<Wallpapares> wallpaparesArrayList = new ArrayList<>();
 
 
     @Override
@@ -53,6 +56,29 @@ public class ListFragment extends Fragment {
         title = getArguments().getString("title");
 //        title = "";
 
+        Wallpapares wallpapares1 = new Wallpapares(0, title);
+        wallpaparesArrayList.add(wallpapares1);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            binding.a.setOnScrollChangeListener((View.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+                if (scrollY == binding.a.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()) {
+                    // in this method we are incrementing page number,
+                    // making progress bar visible and calling get data method.
+                    if (isNextPage) {
+                        listsViewModel.getAllList(title, page);
+
+                    } else {
+                        binding.includedList.progressHorizontal.setVisibility(View.GONE);
+//                        //if progress is gone
+//                        float scale = getContext().getResources().getDisplayMetrics().density;
+//                        int dpAsPixels = (int) (32*scale + 0.5f);
+//                        binding.includedList.recAll.setPadding(0,0,0,dpAsPixels);
+//                        binding.includedList.recAll.requestLayout();
+                    }
+                }
+            });
+        }
+
         return binding.getRoot();
     }
 
@@ -60,33 +86,31 @@ public class ListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        listsViewModel.getList(title);
+        listsViewModel.getAllList(title, 1);
 
         listsViewModel.wallpaparesMutableLiveData.observe(getViewLifecycleOwner(), wallpapares -> {
-            ArrayList<Wallpapares> wallpaparesArrayList = new ArrayList<>();
-            Wallpapares wallpapares1 = new Wallpapares(0,title);
-            wallpaparesArrayList.add(wallpapares1);
+
             wallpaparesArrayList.addAll(wallpapares);
             recCategorys(wallpaparesArrayList);
         });
 
         listsViewModel.isLoading.observe(getViewLifecycleOwner(), aBoolean -> {
-            if(aBoolean){
+            if (aBoolean) {
                 binding.includedList.getRoot().setVisibility(View.INVISIBLE);
                 binding.errorText.setVisibility(View.INVISIBLE);
                 binding.spinKit.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 binding.includedList.getRoot().setVisibility(View.VISIBLE);
                 binding.spinKit.setVisibility(View.INVISIBLE);
             }
         });
 
         listsViewModel.isSuccess.observe(getViewLifecycleOwner(), aBoolean -> {
-            if(aBoolean){
+            if (aBoolean) {
                 binding.a.setVisibility(View.VISIBLE);
                 binding.errorText.setVisibility(View.INVISIBLE);
 
-            }else{
+            } else {
 
                 binding.a.setVisibility(View.INVISIBLE);
                 binding.errorText.setVisibility(View.VISIBLE);
@@ -96,7 +120,7 @@ public class ListFragment extends Fragment {
 
         listsViewModel.isConnect.observe(getViewLifecycleOwner(), aBoolean -> {
             Dialog dialog = new Dialog(getContext(), R.style.Dialog);
-            if(!aBoolean){
+            if (!aBoolean) {
                 dialog.setContentView(R.layout.lost_connection_dialog);
                 dialog.show();
 
@@ -105,7 +129,7 @@ public class ListFragment extends Fragment {
                 again.setClickable(true);
 
                 again.setOnClickListener(view1 -> {
-                    listsViewModel.getList(title);
+                    listsViewModel.getAllList(title, 1);
                     again.setClickable(false);
                     dialog.dismiss();
 
@@ -117,9 +141,14 @@ public class ListFragment extends Fragment {
             }
         });
 
+        listsViewModel.responceCategorysListMutableLiveData.observe(getViewLifecycleOwner(), responceCategorysList -> {
+            isNextPage = responceCategorysList.has_next;
+            page = responceCategorysList.page_next;
+        });
+
     }
 
-    private void recCategorys(ArrayList<Wallpapares> wallpapares){
+    private void recCategorys(ArrayList<Wallpapares> wallpapares) {
         int numberOfColumns = 2;
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), numberOfColumns);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(numberOfColumns, StaggeredGridLayoutManager.VERTICAL);

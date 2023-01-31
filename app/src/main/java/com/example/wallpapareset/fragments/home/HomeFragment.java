@@ -2,6 +2,7 @@ package com.example.wallpapareset.fragments.home;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +28,7 @@ import android.widget.Toast;
 
 import com.example.wallpapareset.R;
 import com.example.wallpapareset.models.responce.Categorize;
+import com.example.wallpapareset.models.responce.ResponceImagesList;
 import com.example.wallpapareset.models.responce.Wallpapares;
 import com.example.wallpapareset.databinding.FragmentHomeBinding;
 import com.example.wallpapareset.fragments.home.adapter.AllAdapter;
@@ -45,7 +48,11 @@ public class HomeFragment extends Fragment {
     private AllAdapter allAdapter;
     private String title = "جدیدترین ها";
     private ListsViewModel homeViewModel;
+    private boolean isNextPage;
+    private int page;
     long currentVisiblePosition = 0;
+    private ArrayList<Wallpapares> wallpaparesArrayList = new ArrayList<>();
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,6 +65,10 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         homeViewModel = new ViewModelProvider(requireActivity()).get(ListsViewModel.class);
+
+
+        Wallpapares one = new Wallpapares(0, title);
+        wallpaparesArrayList.add(one);
         homeViewModel.getHome();
 
 
@@ -66,13 +77,17 @@ public class HomeFragment extends Fragment {
 
 
 
-//        binding.swipHome.setColorSchemeColors(getResources().getColor(R.color.mainOrange), getResources().getColor(R.color.mainGray));
-//        binding.swipHome.setProgressBackgroundColorSchemeColor(getResources().getColor(R.color.mainBlack));
-//        binding.swipHome.setOnRefreshListener(() -> {
-//            homeViewModel.getAll();
-//
-//
-//        });
+        binding.swipHome.setColorSchemeColors(getResources().getColor(R.color.mainOrange), getResources().getColor(R.color.mainGray));
+        binding.swipHome.setProgressBackgroundColorSchemeColor(getResources().getColor(R.color.mainBlack));
+        binding.swipHome.setOnRefreshListener(() -> {
+            wallpaparesArrayList.clear();
+            wallpaparesArrayList.add(one);
+            binding.includedAllPhotos.progressHorizontal.setVisibility(View.VISIBLE);
+            homeViewModel.getAll(1);
+
+
+
+        });
 
         binding.editSearch.onEditorAction(EditorInfo.IME_ACTION_DONE);
 
@@ -109,6 +124,25 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            binding.allMainHome.setOnScrollChangeListener((View.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+                if (scrollY == binding.allMainHome.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()) {
+                    // in this method we are incrementing page number,
+                    // making progress bar visible and calling get data method.
+                    if(isNextPage){
+                        homeViewModel.getAll(page);
+
+                    }else{
+                        binding.includedAllPhotos.progressHorizontal.setVisibility(View.INVISIBLE);
+//                        //if progress is gone
+//                        float scale = getContext().getResources().getDisplayMetrics().density;
+//                        int dpAsPixels = (int) (64*scale + 0.5f);
+//                        binding.includedAllPhotos.getRoot().setPadding(0,0,0,dpAsPixels);
+//                        binding.includedAllPhotos.getRoot().requestLayout();
+                    }
+                }
+            });
+        }
 
 
         // Inflate the layout for this fragment
@@ -121,12 +155,10 @@ public class HomeFragment extends Fragment {
 
         homeViewModel.wallpaparesMutableLiveData.observe(getViewLifecycleOwner(), wallpapares -> {
             if (wallpapares.isEmpty()){
-                binding.includedAllPhotos.setVisibility(View.INVISIBLE);
+                binding.includedAllPhotos.getRoot().setVisibility(View.INVISIBLE);
                 binding.errorText.setVisibility(View.VISIBLE);
             }else {
-                ArrayList<Wallpapares> wallpaparesArrayList = new ArrayList<>();
-                Wallpapares one = new Wallpapares(0, title);
-                wallpaparesArrayList.add(one);
+
                 for (int i = 0; i < wallpapares.size(); i++) {
                     wallpaparesArrayList.add(wallpapares.get(i));
                 }
@@ -143,23 +175,23 @@ public class HomeFragment extends Fragment {
 
         homeViewModel.isLoading.observe(getViewLifecycleOwner(), aBoolean -> {
             binding.recSugg.setVisibility(View.INVISIBLE);
-            binding.includedAllPhotos.setVisibility(View.INVISIBLE);
+            binding.includedAllPhotos.getRoot().setVisibility(View.INVISIBLE);
             binding.spinKit.setVisibility(View.VISIBLE);
 
 //            Handler h = new Handler();
 //            Runnable r = () -> {
             if(aBoolean){
                 binding.recSugg.setVisibility(View.INVISIBLE);
-                binding.includedAllPhotos.setVisibility(View.INVISIBLE);
+                binding.includedAllPhotos.getRoot().setVisibility(View.INVISIBLE);
                 binding.spinKit.setVisibility(View.VISIBLE);
             }else{
 
                 binding.recSugg.setVisibility(View.VISIBLE);
-                binding.includedAllPhotos.setVisibility(View.VISIBLE);
+                binding.includedAllPhotos.getRoot().setVisibility(View.VISIBLE);
                 binding.spinKit.setVisibility(View.INVISIBLE);
 
             }
-//                binding.swipHome.setRefreshing(aBoolean);
+                binding.swipHome.setRefreshing(aBoolean);
 //            };
 //            h.postDelayed(r,1000);
 
@@ -176,7 +208,7 @@ public class HomeFragment extends Fragment {
                 again.setClickable(true);
 
                 again.setOnClickListener(view1 -> {
-                    homeViewModel.getAll();
+                    homeViewModel.getAll(1);
                     again.setClickable(false);
                     dialog.dismiss();
 
@@ -214,6 +246,11 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        homeViewModel.arrayListMutableLiveData.observe(getViewLifecycleOwner(), responceImagesList -> {
+            page = responceImagesList.page_next;
+            isNextPage = responceImagesList.has_next;
+        });
+
     }
 
     public static void hideSoftKeyboard(Activity activity) {
@@ -233,9 +270,9 @@ public class HomeFragment extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), numberOfColumns);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(numberOfColumns, StaggeredGridLayoutManager.VERTICAL);
         staggeredGridLayoutManager.setReverseLayout(false);
-        binding.includedAllPhotos.setLayoutManager(staggeredGridLayoutManager);
+        binding.includedAllPhotos.recAll.setLayoutManager(staggeredGridLayoutManager);
         allAdapter = new AllAdapter(responceImagesLists);
-        binding.includedAllPhotos.setAdapter(allAdapter);
+        binding.includedAllPhotos.recAll.setAdapter(allAdapter);
         allAdapter.notifyDataSetChanged();
     }
 

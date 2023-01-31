@@ -7,9 +7,9 @@ import retrofit2.Call;
 
 
     public class CategorysListRepository {
-        public Call<ResponceCategorysList> getAllCategorys(String cat) {
+        public Call<ResponceCategorysList> getAllCategorys(String cat, int page) {
             //callApi
-            Call<ResponceCategorysList> call = Tools.getApiServicesInstance().getCategorysList(cat);
+            Call<ResponceCategorysList> call = Tools.getApiServicesInstance().getCategorysList(cat, page);
 
             return call;
         }

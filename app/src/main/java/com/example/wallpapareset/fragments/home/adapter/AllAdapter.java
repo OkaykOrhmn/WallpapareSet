@@ -48,22 +48,7 @@ public class AllAdapter extends RecyclerView.Adapter<AllAdapter.MyView>{
             int dpAsPixels = (int) (36*scale + 0.5f);
             holder.cart.setPadding(0,dpAsPixels,0,dpAsPixels);
             holder.cart.requestLayout();
-        }else
-            if(position == suggestions.size()-1){
-                float scale = context.getResources().getDisplayMetrics().density;
-                int dpAsPixels = (int) (80*scale + 0.5f);
-                holder.cart.setPadding(0,0,0,dpAsPixels);
-                holder.cart.requestLayout();
-
-                Picasso.get().load(item.url).into(holder.icon);
-                holder.icon.setOnClickListener(view -> {
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("id", item.id);
-                    bundle.putString("url", item.url);
-                    Navigation.findNavController(view).navigate(R.id.action_to_photoPageFragment, bundle);
-                });
-
-        }else{
+        } else{
                 Picasso.get().load(item.url).into(holder.icon);
             holder.icon.setOnClickListener(view -> {
                 Bundle bundle = new Bundle();

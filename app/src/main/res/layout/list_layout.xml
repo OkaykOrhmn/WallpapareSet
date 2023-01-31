@@ -20,8 +20,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18cdp"
-            android:layout_marginBottom="@dimen/_60cdp"
+            android:layout_marginBottom="@dimen/_8cdp"
             android:layoutDirection="rtl"
+            />
+
+        <ProgressBar
+            android:id="@+id/progress_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_46cdp"
+            android:indeterminate="true"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_alignParentBottom="true"
+            android:progressTint="@color/mainOrange"
+            android:visibility="visible"
+            android:layout_marginBottom="@dimen/_60cdp"
+            android:background="@color/white"
+
+
             />
 
 

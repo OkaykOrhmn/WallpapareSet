@@ -27,6 +27,6 @@ public interface ApiServices {
 
     //https://python.aks14.com/api/v1/image-list-by-category
     @GET("/api/v1/image-list-by-category")
-    Call<ResponceCategorysList> getCategorysList(@Query("category") String category);
+    Call<ResponceCategorysList> getCategorysList(@Query("category") String category, @Query("page") int page);
 
 }

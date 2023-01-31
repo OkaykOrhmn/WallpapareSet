@@ -48,6 +48,8 @@ public class CategorizeFragment extends Fragment {
         binding = FragmentCategorizeBinding.inflate(inflater, container, false);
         listsViewModel = new ViewModelProvider(requireActivity()).get(ListsViewModel.class);
 
+        binding.includedCat.progressHorizontal.setVisibility(View.INVISIBLE);
+
         colors.clear();
         colors.add(R.drawable.background_sugg_1);
         colors.add(R.drawable.background_sugg_2);
@@ -96,7 +98,7 @@ public class CategorizeFragment extends Fragment {
                 again.setClickable(true);
 
                 again.setOnClickListener(view1 -> {
-                    listsViewModel.getAll();
+                    listsViewModel.getAll(1);
                     again.setClickable(false);
                     dialog.dismiss();
 

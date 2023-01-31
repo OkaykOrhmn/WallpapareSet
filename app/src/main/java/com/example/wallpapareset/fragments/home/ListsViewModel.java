@@ -35,6 +35,7 @@ public class ListsViewModel extends AndroidViewModel {
     public MutableLiveData<Boolean> isConnect = new MutableLiveData<>();
     public MutableLiveData<Boolean> isSuccess = new MutableLiveData<>();
     public MutableLiveData<Boolean> isEmpty = new MutableLiveData<>();
+    public int wichPage = 1;
     private ArrayList<Wallpapares> groupOfWall = new ArrayList<>();
     private ArrayList<Categorize> groupOfCat = new ArrayList<>();
 
@@ -53,7 +54,7 @@ public class ListsViewModel extends AndroidViewModel {
             if(Connectivity.isConnected(context)){
                 isConnect.setValue(true);
                 callAllCategorys();
-                callAllImages();
+                callAllImages(wichPage);
             }else{
                 isConnect.setValue(false);
                 isSuccess.setValue(false);
@@ -73,13 +74,13 @@ public class ListsViewModel extends AndroidViewModel {
 
     }
 
-    public void getAll() {
+    public void getAll(int page) {
         //call api
         isLoading.setValue(true);
         if(Connectivity.isConnected(context)){
             isConnect.setValue(true);
             callAllCategorys();
-            callAllImages();
+            callAllImages(page);
         }else{
             isConnect.setValue(false);
             isSuccess.setValue(false);
@@ -92,9 +93,9 @@ public class ListsViewModel extends AndroidViewModel {
     }
 
 
-    private void callAllImages() {
+    private void callAllImages(int page) {
 
-            Call<ResponceImagesList> call = imagesListRepository.getAllImages(1);
+            Call<ResponceImagesList> call = imagesListRepository.getAllImages(page);
             call.enqueue(new Callback<ResponceImagesList>() {
                 @Override
                 public void onResponse(Call<ResponceImagesList> call, Response<ResponceImagesList> response) {
@@ -104,6 +105,9 @@ public class ListsViewModel extends AndroidViewModel {
                         groupOfWall.clear();
                         groupOfWall.addAll(response.body().wallpapares);
                         isSuccess.setValue(true);
+                        if(response.body().has_next){
+                            wichPage=response.body().page_next;
+                        }
                     }else{
                         isSuccess.setValue(false);
 
