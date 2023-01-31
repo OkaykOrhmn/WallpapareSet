@@ -16,13 +16,23 @@
         app:layout_constraintGuide_percent="0.7"/>
 
     <TextView
+        android:id="@+id/name_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Wallpapare"
-        android:textColor="@color/mainOrange"
-        android:textSize="@dimen/_46cdp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="پس زمینه مذهبی"
+        style="@style/fontForHeaderOrange"
+        app:layout_constraintBottom_toTopOf="@id/guideline_70"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="@dimen/_24cdp"
+        />
+
+    <ImageView
+        android:id="@+id/icon_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon"
+        app:layout_constraintBottom_toBottomOf="@id/name_main"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

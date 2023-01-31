@@ -37,10 +37,10 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyView>{
     public void onBindViewHolder(@NonNull ColorAdapter.MyView holder, int position) {
         holder.color.setBackgroundResource(colors.get(position));
         holder.color.setOnClickListener(view -> {
-            Bundle bundle = new Bundle();
-            bundle.putInt("back",colors.get(position));
+//            Bundle bundle = new Bundle();
+//            bundle.putInt("back",colors.get(position));
 
-            Navigation.findNavController(view).navigate(R.id.action_to_listFragment, bundle);
+//            Navigation.findNavController(view).navigate(R.id.action_to_listFragment, bundle);
         });
 
 //        holder.color.setBackgroundResource(colors.get(position));

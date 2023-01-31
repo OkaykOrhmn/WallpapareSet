@@ -3,6 +3,7 @@ package com.example.wallpapareset.fragments.home.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,16 +16,17 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wallpapareset.R;
-import com.example.wallpapareset.models.model.Suggestions;
+import com.example.wallpapareset.models.responce.Categorize;
 
 import java.util.ArrayList;
 
 public class SuggestionsAdapter extends RecyclerView.Adapter<SuggestionsAdapter.MyView>{
 
+    private static final String TAG = "Kia----SuggAdapter----> ";
     private Context context;
-    private ArrayList<Suggestions> suggestions;
+    private ArrayList<Categorize> suggestions;
 
-    public SuggestionsAdapter(ArrayList<Suggestions> suggestions){
+    public SuggestionsAdapter(ArrayList<Categorize> suggestions){
         this.suggestions=suggestions;
     }
 
@@ -35,14 +37,16 @@ public class SuggestionsAdapter extends RecyclerView.Adapter<SuggestionsAdapter.
         View itemview = LayoutInflater.from(parent.getContext()).inflate(R.layout.suggestions_layout, parent, false);
         return new SuggestionsAdapter.MyView(itemview);    }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
+    @SuppressLint({"UseCompatLoadingForDrawables", "LongLogTag"})
     @Override
     public void onBindViewHolder(@NonNull SuggestionsAdapter.MyView holder, int position) {
-        holder.icon.setImageResource(suggestions.get(position).icon);
-        holder.name.setText(suggestions.get(position).name);
+        Categorize item = suggestions.get(position);
+        holder.name.setText(item.title);
+        holder.icon.setImageResource(R.drawable.icons_electronics);
+        Log.d(TAG, "onBindViewHolder: "+ item.title);
         holder.icon.setOnClickListener(view -> {
             Bundle bundle = new Bundle();
-            bundle.putString("title", suggestions.get(position).name);
+            bundle.putString("title", item.title);
 
             Navigation.findNavController(view).navigate(R.id.action_to_listFragment, bundle);
         });

@@ -11,24 +11,25 @@
         android:id="@+id/photo_all"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+
+
+        android:layout_marginBottom="12dp"
         android:adjustViewBounds="true"
-        app:riv_corner_radius="12dp"
         android:foreground="@drawable/forground_photo"
-
-
-        >
+        app:riv_corner_radius="12dp">
 
 
     </com.makeramen.roundedimageview.RoundedImageView>
 
     <TextView
+        android:id="@+id/name"
+        style="@style/fontForHeaderWhite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        style="@style/fontForHeaderWhite"
-        android:id="@+id/name"
-        />
+        android:layout_centerInParent="true" />
 
 
 </RelativeLayout>

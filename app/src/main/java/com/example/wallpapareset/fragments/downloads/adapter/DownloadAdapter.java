@@ -1,4 +1,6 @@
-package com.example.wallpapareset.fragments.settingFragment.adapter;
+package com.example.wallpapareset.fragments.downloads.adapter;
+
+import static android.app.Activity.RESULT_OK;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -55,11 +57,12 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.MyView
 
             if (ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
 
-
                 Uri uri = Uri.parse(item.getPath());
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setDataAndType(uri, "image/*");
                 activity.startActivity(intent);
+
+
 
             } else {
                 Toast.makeText(activity, "no", Toast.LENGTH_SHORT).show();

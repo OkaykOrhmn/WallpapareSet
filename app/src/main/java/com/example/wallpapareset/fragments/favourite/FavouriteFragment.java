@@ -6,16 +6,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.wallpapareset.R;
-import com.example.wallpapareset.models.model.Photo;
+import com.example.wallpapareset.models.responce.Wallpapares;
+import com.example.wallpapareset.fragments.home.adapter.AllAdapter;
 import com.example.wallpapareset.database.SqlFav;
 import com.example.wallpapareset.databinding.FragmentFavouriteBinding;
-import com.example.wallpapareset.fragments.favourite.adapter.FavAdapter;
 
 import java.util.ArrayList;
 
@@ -24,8 +22,8 @@ public class FavouriteFragment extends Fragment {
 
     private static final String TAG = "Kia--FavouriteFr---- > ";
     private FragmentFavouriteBinding binding;
-    private FavAdapter favAdapter;
-    private ArrayList<Photo> photoArrayList;
+    private AllAdapter allAdapter;
+    private ArrayList<Wallpapares> photoArrayList = new ArrayList<>();
     private SqlFav sqlFav;
 
 
@@ -41,14 +39,13 @@ public class FavouriteFragment extends Fragment {
 
         binding = FragmentFavouriteBinding.inflate(inflater, container, false);
         sqlFav = new SqlFav(getContext());
+        Wallpapares a = new Wallpapares(0, "موردعلاقه ها");
+        photoArrayList.clear();
+        photoArrayList.add(a);
+        photoArrayList.addAll(sqlFav.getData());
 
-        sqlFav.Insert(0, R.color.white);
 
-        photoArrayList = sqlFav.getData();
-        Log.d(TAG, "size list is -> : " + photoArrayList.size());
-
-
-        if (photoArrayList.size() == 1) {
+        if (photoArrayList.size() == 1 ) {
             binding.emptyText.setVisibility(View.VISIBLE);
             binding.scrollFav.setVisibility(View.INVISIBLE);
 
@@ -60,9 +57,9 @@ public class FavouriteFragment extends Fragment {
             StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(numberOfColumns, StaggeredGridLayoutManager.VERTICAL);
             staggeredGridLayoutManager.setReverseLayout(false);
             binding.includedFav.recAll.setLayoutManager(staggeredGridLayoutManager);
-            favAdapter = new FavAdapter(photoArrayList, "مورد علاقه ها");
-            binding.includedFav.recAll.setAdapter(favAdapter);
-            favAdapter.notifyDataSetChanged();
+            allAdapter = new AllAdapter(photoArrayList);
+            binding.includedFav.recAll.setAdapter(allAdapter);
+            allAdapter.notifyDataSetChanged();
         }
 
         // Inflate the layout for this fragment

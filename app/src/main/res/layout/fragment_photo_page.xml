@@ -44,60 +44,97 @@
             app:tint="@color/mainOrange" />
 
     </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
 
-        <ImageView
-            android:id="@+id/image_main"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/spin_kit"
+                style="@style/SpinKitView.Large.Circle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                app:SpinKit_Color="@color/mainOrange"
+                app:SpinKit_Style="Wave"
+                />
 
-        <ImageView
-            android:id="@+id/heart"
+        <TextView
+            android:id="@+id/error_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@id/button_image"
-            android:layout_marginRight="@dimen/_24cdp"
-            android:layout_toLeftOf="@id/download_buttom"
-            android:background="@drawable/bottom_navigation_back"
-            android:padding="@dimen/_8cdp"
-            android:src="@drawable/ic_baseline_favorite_border_24"
-            app:tint="@color/mainOrange"
-
-            />
-
-        <ImageView
-            android:id="@+id/download_buttom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/button_image"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/_24cdp"
-            android:background="@drawable/bottom_navigation_back"
-            android:padding="@dimen/_8cdp"
-            android:src="@drawable/ic_baseline_arrow_circle_down_24"
-            app:tint="@color/mainOrange"
-
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_image"
-            style="@style/fontForMenu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="@dimen/_24cdp"
-            android:layout_marginTop="@dimen/_24cdp"
-            android:layout_marginEnd="@dimen/_24cdp"
-            android:layout_marginBottom="@dimen/_24cdp"
-            android:backgroundTint="@color/mainBlack"
-            android:paddingVertical="@dimen/_12cdp"
-            android:text="تنطیم به عنوان پس زمینه"
-            android:textColor="@color/mainOrange"
+            android:layout_centerInParent="true"
+            android:text="خطا در بارگیری اطلاعات لطفا دوباره امتحان کنید!!"
+            style="@style/fontForNormalOrange"
+            android:gravity="center"
             android:textStyle="bold"
-            app:cornerRadius="@dimen/_18cdp" />
+            android:visibility="invisible"
+            />
+
+
+        <RelativeLayout
+            android:id="@+id/all_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            >
+
+            <ImageView
+                android:id="@+id/image_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/heart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/button_image"
+                android:layout_marginRight="@dimen/_24cdp"
+                android:layout_toLeftOf="@id/download_buttom"
+                android:background="@drawable/bottom_navigation_back"
+                android:padding="@dimen/_8cdp"
+                android:src="@drawable/ic_baseline_favorite_border_24"
+                app:tint="@color/mainOrange"
+
+                />
+
+            <ImageView
+                android:id="@+id/download_buttom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/button_image"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/_24cdp"
+                android:background="@drawable/bottom_navigation_back"
+                android:padding="@dimen/_8cdp"
+                android:src="@drawable/ic_baseline_arrow_circle_down_24"
+                app:tint="@color/mainOrange"
+
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_image"
+                style="@style/fontForMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/_24cdp"
+                android:layout_marginTop="@dimen/_24cdp"
+                android:layout_marginEnd="@dimen/_24cdp"
+                android:layout_marginBottom="@dimen/_24cdp"
+                android:backgroundTint="@color/mainBlack"
+                android:paddingVertical="@dimen/_12cdp"
+                android:text="تنطیم به عنوان پس زمینه"
+                android:textColor="@color/mainOrange"
+                android:textStyle="bold"
+                app:cornerRadius="@dimen/_18cdp" />
+
+        </RelativeLayout>
+
+
+
+
 
 
 

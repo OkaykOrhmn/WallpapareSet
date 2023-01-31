@@ -8,8 +8,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.wallpapareset.R;
+import com.example.wallpapareset.view.Animations;
 
 public class SplahActivity extends AppCompatActivity {
 
@@ -21,6 +24,9 @@ public class SplahActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         window = getWindow();
+
+        ImageView imageView = findViewById(R.id.icon_main);
+        TextView textView = findViewById(R.id.name_main);
 
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);

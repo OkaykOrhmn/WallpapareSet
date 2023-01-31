@@ -14,16 +14,16 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wallpapareset.R;
-import com.example.wallpapareset.models.model.Suggestions;
+import com.example.wallpapareset.models.responce.Categorize;
 
 import java.util.ArrayList;
 
 public class CategorizeAdapter extends RecyclerView.Adapter<CategorizeAdapter.MyView> {
 
     private Context context;
-    private ArrayList<Suggestions> suggestions;
+    private ArrayList<Categorize> suggestions;
 
-    public CategorizeAdapter(ArrayList<Suggestions> suggestions) {
+    public CategorizeAdapter(ArrayList<Categorize> suggestions) {
         this.suggestions = suggestions;
     }
 
@@ -38,11 +38,30 @@ public class CategorizeAdapter extends RecyclerView.Adapter<CategorizeAdapter.My
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public void onBindViewHolder(@NonNull CategorizeAdapter.MyView holder, int position) {
-        holder.icon.setImageResource(suggestions.get(position).icon);
-        holder.name.setText(suggestions.get(position).name);
+        if(position%1==0){
+            holder.icon.setImageResource(R.drawable.background_sugg_5);
+
+        }
+        if(position%2==0){
+            holder.icon.setImageResource(R.drawable.background_sugg_1);
+
+        }
+        if(position%3 == 0){
+            holder.icon.setImageResource(R.drawable.background_sugg_2);
+
+        }
+        if(position%4==0){
+            holder.icon.setImageResource(R.drawable.background_sugg_3);
+
+        }
+        if(position%5==0){
+            holder.icon.setImageResource(R.drawable.background_sugg_4);
+
+        }
+        holder.name.setText(suggestions.get(position).title);
         holder.icon.setOnClickListener(view -> {
             Bundle bundle = new Bundle();
-            bundle.putString("title", suggestions.get(position).name);
+            bundle.putString("title", suggestions.get(position).title);
 
             Navigation.findNavController(view).navigate(R.id.action_to_listFragment, bundle);
         });

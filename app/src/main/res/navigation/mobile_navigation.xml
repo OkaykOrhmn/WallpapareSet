@@ -23,9 +23,9 @@
         tools:layout="@layout/fragment_favourite" />
     <fragment
         android:id="@+id/settingFragment"
-        android:name="com.example.wallpapareset.fragments.settingFragment.SettingFragment"
+        android:name="com.example.wallpapareset.fragments.downloads.DownloadsFragment"
         android:label="fragment_setting"
-        tools:layout="@layout/fragment_setting" />
+        tools:layout="@layout/fragment_download" />
     <fragment
         android:id="@+id/categorizeFrahment"
         android:name="com.example.wallpapareset.fragments.categorize.CategorizeFragment"

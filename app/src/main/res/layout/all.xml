@@ -2,6 +2,7 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/all_photo_main"
 
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
@@ -29,6 +30,16 @@
         style="@style/fontForHeaderBlack"
         android:id="@+id/name"
         />
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spin_kit"
+        style="@style/SpinKitView.Large.Circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:SpinKit_Color="@color/mainOrange"
+        android:visibility="invisible"
+        app:SpinKit_Style="Wave" />
 
 
 </RelativeLayout>

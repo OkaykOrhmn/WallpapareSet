@@ -1,19 +1,26 @@
 package com.example.wallpapareset.fragments.layouts;
 
+import android.app.Dialog;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.wallpapareset.R;
+import com.example.wallpapareset.models.responce.Wallpapares;
+import com.example.wallpapareset.fragments.categorize.CategorizeListViewModel;
 import com.example.wallpapareset.fragments.home.adapter.AllAdapter;
 import com.example.wallpapareset.databinding.FragmentListBinding;
+import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 
@@ -22,9 +29,11 @@ public class ListFragment extends Fragment {
     private static final String TAG = "Kia---ListFr----> ";
     private FragmentListBinding binding;
     private AllAdapter allAdapter;
-    private ArrayList<Integer> all = new ArrayList<>();
+    private ArrayList<Wallpapares> all = new ArrayList<>();
     private String title ;
     private int background ;
+    private CategorizeListViewModel listsViewModel;
+
 
 
 
@@ -39,41 +48,85 @@ public class ListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentListBinding.inflate(inflater, container, false);
+        listsViewModel = new ViewModelProvider(requireActivity()).get(CategorizeListViewModel.class);
+        assert getArguments() != null;
+        title = getArguments().getString("title");
+//        title = "";
 
-        if (getArguments() != null) {
-            if (getArguments().getString("title") != null){
-                title = getArguments().getString("title");
-                background = R.color.white;
+        return binding.getRoot();
+    }
 
-            }else if(getArguments().get("back") != null){
-                background = getArguments().getInt("back");
-                title = "رنگ";
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        listsViewModel.getList(title);
+
+        listsViewModel.wallpaparesMutableLiveData.observe(getViewLifecycleOwner(), wallpapares -> {
+            ArrayList<Wallpapares> wallpaparesArrayList = new ArrayList<>();
+            Wallpapares wallpapares1 = new Wallpapares(0,title);
+            wallpaparesArrayList.add(wallpapares1);
+            wallpaparesArrayList.addAll(wallpapares);
+            recCategorys(wallpaparesArrayList);
+        });
+
+        listsViewModel.isLoading.observe(getViewLifecycleOwner(), aBoolean -> {
+            if(aBoolean){
+                binding.includedList.getRoot().setVisibility(View.INVISIBLE);
+                binding.errorText.setVisibility(View.INVISIBLE);
+                binding.spinKit.setVisibility(View.VISIBLE);
+            }else{
+                binding.includedList.getRoot().setVisibility(View.VISIBLE);
+                binding.spinKit.setVisibility(View.INVISIBLE);
             }
-        }else{
-            title = "";
-            background = R.color.white;
-        }
+        });
 
-        Log.d(TAG, " background is -> "+ background);
+        listsViewModel.isSuccess.observe(getViewLifecycleOwner(), aBoolean -> {
+            if(aBoolean){
+                binding.a.setVisibility(View.VISIBLE);
+                binding.errorText.setVisibility(View.INVISIBLE);
 
+            }else{
 
-        all.clear();
-        all.add(background);
-        for (int i = 0; i < 22; i++) {
-            all.add(R.drawable.image5);
+                binding.a.setVisibility(View.INVISIBLE);
+                binding.errorText.setVisibility(View.VISIBLE);
 
-        }
+            }
+        });
 
+        listsViewModel.isConnect.observe(getViewLifecycleOwner(), aBoolean -> {
+            Dialog dialog = new Dialog(getContext(), R.style.Dialog);
+            if(!aBoolean){
+                dialog.setContentView(R.layout.lost_connection_dialog);
+                dialog.show();
+
+                MaterialButton again = dialog.findViewById(R.id.again);
+                MaterialButton exit = dialog.findViewById(R.id.exit);
+                again.setClickable(true);
+
+                again.setOnClickListener(view1 -> {
+                    listsViewModel.getList(title);
+                    again.setClickable(false);
+                    dialog.dismiss();
+
+                });
+
+                exit.setOnClickListener(view12 -> {
+                    requireActivity().finish();
+                });
+            }
+        });
+
+    }
+
+    private void recCategorys(ArrayList<Wallpapares> wallpapares){
         int numberOfColumns = 2;
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), numberOfColumns);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(numberOfColumns, StaggeredGridLayoutManager.VERTICAL);
         staggeredGridLayoutManager.setReverseLayout(false);
         binding.includedList.recAll.setLayoutManager(staggeredGridLayoutManager);
-        allAdapter = new AllAdapter(all, title);
+        allAdapter = new AllAdapter(wallpapares);
         binding.includedList.recAll.setAdapter(allAdapter);
         allAdapter.notifyDataSetChanged();
-
-
-        return binding.getRoot();
     }
 }

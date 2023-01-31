@@ -56,13 +56,46 @@
 
             </LinearLayout>
 
-
-            <include
-                android:id="@+id/included_cat"
-                layout="@layout/list_layout"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                />
+                >
+
+                <include
+
+                    android:id="@+id/included_cat"
+                    layout="@layout/list_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/error_text"
+                    style="@style/fontForNormalOrange"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="خطا در بارگیری اطلاعات لطفا دوباره امتحان کنید!!"
+                    android:textStyle="bold"
+                    android:visibility="invisible" />
+
+                <com.github.ybq.android.spinkit.SpinKitView
+                    android:id="@+id/spin_kit"
+                    style="@style/SpinKitView.Large.Circle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    app:SpinKit_Color="@color/mainOrange"
+
+                    app:SpinKit_Style="Wave" />
+
+
+
+            </RelativeLayout>
+
+
+
+
 
 
 

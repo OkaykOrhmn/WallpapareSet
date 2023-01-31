@@ -13,6 +13,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,7 +30,9 @@ import com.example.wallpapareset.R;
 import com.example.wallpapareset.databinding.ActivityScreensBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class Screens extends AppCompatActivity {
 
@@ -156,6 +159,8 @@ public class Screens extends AppCompatActivity {
             }
         }
     }
+
+
 
 
 

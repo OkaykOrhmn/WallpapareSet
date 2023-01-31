@@ -8,7 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.example.wallpapareset.models.model.Photo;
+
+import com.example.wallpapareset.models.responce.Wallpapares;
 
 import java.util.ArrayList;
 
@@ -24,7 +25,7 @@ public class SqlFav extends SQLiteOpenHelper {
 
         sqLiteDatabase.execSQL(" CREATE TABLE " + TABLE_NAME +
                 "(id INTEGER PRIMARY KEY , " +
-                " address INTEGER)" );
+                " address TXT)" );
 
     }
 
@@ -33,25 +34,25 @@ public class SqlFav extends SQLiteOpenHelper {
 
     }
 
-    public ArrayList<Photo> getData(){
+    public ArrayList<Wallpapares> getData(){
 
-        ArrayList<Photo> photos = new ArrayList<>();
+        ArrayList<Wallpapares> AllPhotoss = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         if (c.moveToFirst()){
             do {
                 // Passing values
                 int id = c.getInt(0);
-                int address = c.getInt(1);
-                Photo photo = new Photo(id,address);
-                photos.add(photo);
+                String address = c.getString(1);
+                Wallpapares AllPhotos = new Wallpapares(id,address);
+                AllPhotoss.add(AllPhotos);
 
                 // Do something Here with values
             } while(c.moveToNext());
         }
         c.close();
 
-        return photos;
+        return AllPhotoss;
 
 
     }
@@ -76,7 +77,7 @@ public class SqlFav extends SQLiteOpenHelper {
 
     }
 
-    public void Insert(Integer id, Integer address) {
+    public void Insert(Integer id, String address) {
 
         SQLiteDatabase database = this.getReadableDatabase();
         ContentValues contentValues = new ContentValues();

@@ -1,4 +1,4 @@
-package com.example.wallpapareset.fragments.settingFragment;
+package com.example.wallpapareset.fragments.downloads;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -7,13 +7,19 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,19 +27,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.wallpapareset.databinding.FragmentSettingBinding;
-import com.example.wallpapareset.fragments.settingFragment.adapter.DownloadAdapter;
+import com.example.wallpapareset.databinding.FragmentDownloadBinding;
+import com.example.wallpapareset.fragments.downloads.adapter.DownloadAdapter;
+import com.example.wallpapareset.fragments.home.ListsViewModel;
 
 import java.io.File;
 
-public class SettingFragment extends Fragment {
+public class DownloadsFragment extends Fragment {
 
     private static final String TAG = "Kia--SettingFragment----> ";
-    private FragmentSettingBinding binding;
+    private FragmentDownloadBinding binding;
     private DownloadAdapter downloadAdapter;
+    private DownloadViewModel downloadViewModel;
     private boolean empty = false;
+    private boolean per = false;
     private String alarm;
     private static int REQUEST_CODE = 100;
+    Handler h = new Handler();
+    Runnable r;
+
 
 
 
@@ -48,27 +60,56 @@ public class SettingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentSettingBinding.inflate(inflater, container, false);
+        binding = FragmentDownloadBinding.inflate(inflater, container, false);
+        downloadViewModel = new ViewModelProvider(requireActivity()).get(DownloadViewModel.class);
+        per = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+
+//        ////////////////////----------~~ <onBackPress> ~~----------////////////////////
+//
+//        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+//            @Override
+//            public void handleOnBackPressed() {
+//                // Handle the back button event
+//
+//            }
+//        };
+//        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
+//
+//        ////////////////////----------~~ <onBackPress> ~~----------////////////////////
 
 
-        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            creatList();
-        } else {
-            askPermision();
-        }
+        binding.a.setVisibility(View.INVISIBLE);
 
-        if (empty){
-            binding.alarm.setText(alarm);
-            binding.a.setVisibility(View.INVISIBLE);
-            binding.alarmLayout.setVisibility(View.VISIBLE);
-            Log.d(TAG, "empty: " + empty);
-        }else {
-            binding.a.setVisibility(View.VISIBLE);
-            binding.alarmLayout.setVisibility(View.INVISIBLE);
-            Log.d(TAG, "empty: " + empty);
+         r = () -> {
+
+            if (per){
+
+                creatList();
+            }else{
+                askPermision();
+            }
+
+            if (empty){
+                binding.alarm.setText(alarm);
+                binding.a.setVisibility(View.INVISIBLE);
+                binding.alarmLayout.setVisibility(View.VISIBLE);
+                Log.d(TAG, "empty: " + empty);
+                binding.spinKit.setVisibility(View.INVISIBLE);
+            }else {
+                binding.a.setVisibility(View.VISIBLE);
+                binding.alarmLayout.setVisibility(View.INVISIBLE);
+                Log.d(TAG, "empty: " + empty);
+                binding.spinKit.setVisibility(View.INVISIBLE);
 
 
-        }
+
+            }
+
+        };
+        h.postDelayed(r, 500);
+
+
+
 
         binding.buttonPermisions.setOnClickListener(view -> {
 
@@ -86,6 +127,37 @@ public class SettingFragment extends Fragment {
         return binding.getRoot();
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        downloadViewModel.isPermission.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if(aBoolean){
+                    creatList();
+                }else {
+                    askPermision();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    @SuppressLint("LongLogTag")
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause: ");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 
     @SuppressLint("LongLogTag")
     private void askPermision() {
@@ -131,6 +203,9 @@ public class SettingFragment extends Fragment {
 
         
     }
+
+
+
 
 
 }

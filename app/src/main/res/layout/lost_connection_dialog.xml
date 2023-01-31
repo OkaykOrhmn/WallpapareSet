@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:cardCornerRadius="@dimen/_12cdp"
+        android:layout_margin="@dimen/_18cdp"
+        >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@color/mainBlack"
+            android:orientation="vertical"
+            android:padding="@dimen/_24cdp"
+
+            >
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                >
+                <ImageView
+                    android:id="@+id/image_connection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/connect_error"
+                    android:layout_centerInParent="true"
+                    app:tint="@color/mainOrange"
+                    android:layout_margin="@dimen/_12cdp"
+                    />
+
+                <com.github.ybq.android.spinkit.SpinKitView
+                    android:id="@+id/spin_kit"
+                    style="@style/SpinKitView.Large.Circle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    app:SpinKit_Color="@color/mainOrange"
+                    android:visibility="invisible"
+                    app:SpinKit_Style="Wave" />
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="مشکلی در اتصال به وجود آمده!!"
+                style="@style/fontForNormalOrange"
+                android:layout_margin="@dimen/_12cdp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginHorizontal="@dimen/_4cdp"
+                android:layout_marginVertical="@dimen/_12cdp"
+                >
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/exit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="خروج برنامه"
+                    android:textSize="@dimen/_12cdp"
+                    android:layout_margin="@dimen/_4cdp"
+                    android:backgroundTint="@color/mainBlack"
+                    app:strokeColor="@color/mainOrange"
+                    app:strokeWidth="@dimen/_2cdp"
+
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/again"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="تلاش مجدد"
+                    android:textSize="@dimen/_12cdp"
+                    android:layout_margin="@dimen/_4cdp"
+                    />
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

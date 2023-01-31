@@ -34,6 +34,13 @@
         <item name="android:textSize">@dimen/_24cdp</item>
     </style>
 
+    <style name="fontForHeaderOrange">
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/iran_sans_mob</item>
+        <item name="android:textColor">@color/mainOrange</item>
+        <item name="android:textSize">@dimen/_24cdp</item>
+    </style>
+
     <style name="fontForMenu">
         <item name="android:textStyle">normal</item>
         <item name="android:fontFamily">@font/iran_sans_mob</item>
@@ -47,6 +54,15 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/_16cdp</item>
     </style>
+
+    <style name="fontForNormalOrange">
+        <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">@font/iran_sans_mob</item>
+        <item name="android:textColor">@color/mainOrange</item>
+        <item name="android:textSize">@dimen/_16cdp</item>
+    </style>
+
+
     <style name="fontForNormalBlack">
         <item name="android:textStyle">normal</item>
         <item name="android:fontFamily">@font/iran_sans_mob</item>

@@ -32,7 +32,7 @@
             android:id="@+id/categorizeFrahment"
             android:icon="@drawable/icons_categorize"
             android:iconTint="@color/white"
-            android:title="طبقه بندی"
+            android:title="دسته بندی"
             app:itemTextAppearance="@style/fontForMenu"
 
 
