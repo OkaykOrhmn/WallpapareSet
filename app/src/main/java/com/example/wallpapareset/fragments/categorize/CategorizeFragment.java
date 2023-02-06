@@ -1,6 +1,7 @@
 package com.example.wallpapareset.fragments.categorize;
 
 import android.app.Dialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.wallpapareset.R;
+import com.example.wallpapareset.fragments.categorize.adapter.ColorCat;
 import com.example.wallpapareset.models.responce.Categorize;
 import com.example.wallpapareset.fragments.home.ListsViewModel;
 import com.example.wallpapareset.databinding.FragmentCategorizeBinding;
@@ -32,7 +34,7 @@ public class CategorizeFragment extends Fragment {
     private FragmentCategorizeBinding binding;
     private CategorizeAdapter categorizeAdapter;
     private ColorAdapter colorAdapter;
-    private ArrayList<Integer> colors = new ArrayList<>();
+    private ArrayList<ColorCat> colors = new ArrayList<>();
     private ListsViewModel listsViewModel;
 
     @Override
@@ -51,11 +53,16 @@ public class CategorizeFragment extends Fragment {
         binding.includedCat.progressHorizontal.setVisibility(View.INVISIBLE);
 
         colors.clear();
-        colors.add(R.drawable.background_sugg_1);
-        colors.add(R.drawable.background_sugg_2);
-        colors.add(R.drawable.background_sugg_3);
-        colors.add(R.drawable.background_sugg_4);
-        colors.add(R.drawable.background_sugg_5);
+        ColorCat colorCat1 = new ColorCat(R.drawable.background_sugg_1, "قرمز");
+        ColorCat colorCat2 = new ColorCat(R.drawable.background_sugg_2, "آبی");
+        ColorCat colorCat3 = new ColorCat(R.drawable.background_sugg_3, "سبز");
+        ColorCat colorCat4 = new ColorCat(R.drawable.background_sugg_4, "بنفش");
+        ColorCat colorCat5 = new ColorCat(R.drawable.background_sugg_5, "نارنجی");
+        colors.add(colorCat1);
+        colors.add(colorCat2);
+        colors.add(colorCat3);
+        colors.add(colorCat4);
+        colors.add(colorCat5);
 
         LinearLayoutManager horizColors = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, true);
         binding.recColors.setLayoutManager(horizColors);
@@ -70,6 +77,12 @@ public class CategorizeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+            listsViewModel.getSavedData();
+
+
+
+
 
         listsViewModel.categorizeMutableLiveData.observe(getViewLifecycleOwner(), categorizes -> {
 //            ArrayList<Categorize> categorizeArrayList = new ArrayList<>();
@@ -110,7 +123,7 @@ public class CategorizeFragment extends Fragment {
             }
         });
 
-        listsViewModel.isSuccess.observe(getViewLifecycleOwner(), aBoolean -> {
+        listsViewModel.isSuccessCat.observe(getViewLifecycleOwner(), aBoolean -> {
             if (aBoolean) {
                 binding.includedCat.getRoot().setVisibility(View.VISIBLE);
                 binding.errorText.setVisibility(View.INVISIBLE);
@@ -127,11 +140,9 @@ public class CategorizeFragment extends Fragment {
         });
 
         listsViewModel.isLoading.observe(getViewLifecycleOwner(), aBoolean -> {
-            binding.includedCat.getRoot().setVisibility(View.INVISIBLE);
-            binding.spinKit.setVisibility(View.VISIBLE);
 
-            Handler h = new Handler();
-            Runnable r = () -> {
+
+
                 if (aBoolean) {
                     binding.includedCat.getRoot().setVisibility(View.INVISIBLE);
                     binding.spinKit.setVisibility(View.VISIBLE);
@@ -141,8 +152,7 @@ public class CategorizeFragment extends Fragment {
                     binding.spinKit.setVisibility(View.INVISIBLE);
 
                 }
-            };
-            h.postDelayed(r, 1000);
+
 
         });
 
@@ -155,4 +165,5 @@ public class CategorizeFragment extends Fragment {
         binding.includedCat.recAll.setAdapter(categorizeAdapter);
         categorizeAdapter.notifyDataSetChanged();
     }
+
 }

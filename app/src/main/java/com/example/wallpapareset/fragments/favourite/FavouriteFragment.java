@@ -44,6 +44,8 @@ public class FavouriteFragment extends Fragment {
         photoArrayList.add(a);
         photoArrayList.addAll(sqlFav.getData());
 
+        binding.includedFav.progressHorizontal.setVisibility(View.GONE);
+
 
         if (photoArrayList.size() == 1 ) {
             binding.emptyText.setVisibility(View.VISIBLE);

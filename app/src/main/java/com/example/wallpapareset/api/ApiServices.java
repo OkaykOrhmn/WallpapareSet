@@ -29,4 +29,10 @@ public interface ApiServices {
     @GET("/api/v1/image-list-by-category")
     Call<ResponceCategorysList> getCategorysList(@Query("category") String category, @Query("page") int page);
 
+    //https://python.aks14.com/api/v1/image-search
+    @GET("/api/v1/image-search")
+    Call<ResponceSearch> getSearch(@Query("search") String search, @Query("page") int page);
+
+
+
 }

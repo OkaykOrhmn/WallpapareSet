@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.wallpapareset.api.ResponceSearch;
+import com.example.wallpapareset.api.SearchRepository;
 import com.example.wallpapareset.models.responce.Categorize;
 import com.example.wallpapareset.models.responce.ResponceCategorys;
 import com.example.wallpapareset.models.responce.ResponceImagesList;
@@ -28,15 +30,24 @@ public class ListsViewModel extends AndroidViewModel {
     private final Context context;
     private final ImagesListRepository imagesListRepository = new ImagesListRepository();
     private final CategorysRepository categorysListRepository = new CategorysRepository();
-    public MutableLiveData<ResponceImagesList> arrayListMutableLiveData = new MutableLiveData<>();
+
+    public MutableLiveData<ResponceImagesList> responceImageList = new MutableLiveData<>();
+
     public MutableLiveData<ArrayList<Wallpapares>> wallpaparesMutableLiveData = new MutableLiveData<>();
+
     public MutableLiveData<ArrayList<Categorize>> categorizeMutableLiveData = new MutableLiveData<>();
+
     public MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
+    public MutableLiveData<Boolean> isLoadingSearch = new MutableLiveData<>();
     public MutableLiveData<Boolean> isConnect = new MutableLiveData<>();
-    public MutableLiveData<Boolean> isSuccess = new MutableLiveData<>();
-    public MutableLiveData<Boolean> isEmpty = new MutableLiveData<>();
+    public MutableLiveData<Boolean> isSuccessList = new MutableLiveData<>();
+    public MutableLiveData<Boolean> isSuccessCat = new MutableLiveData<>();
+
+    public boolean isAdd = true;
     public int wichPage = 1;
-    private ArrayList<Wallpapares> groupOfWall = new ArrayList<>();
+    public int wichPageSearch = 1;
+
+    public ArrayList<Wallpapares> groupOfWall = new ArrayList<>();
     private ArrayList<Categorize> groupOfCat = new ArrayList<>();
 
 
@@ -46,29 +57,28 @@ public class ListsViewModel extends AndroidViewModel {
 
     }
 
-    public void getHome() {
 
-        if (groupOfWall.size() == 0 && groupOfCat.size() == 0) {
-            //call api
-            isLoading.setValue(true);
-            if(Connectivity.isConnected(context)){
-                isConnect.setValue(true);
-                callAllCategorys();
-                callAllImages(wichPage);
-            }else{
-                isConnect.setValue(false);
-                isSuccess.setValue(false);
+    public void getSavedData() {
+        isLoading.setValue(true);
+        if(Connectivity.isConnected(context)) {
+            isConnect.setValue(true);
+            if (groupOfWall.size() == 0 || groupOfCat.size() == 0) {
+                //call api
+                getAll(wichPage);
+                isLoading.setValue(false);
+
+            } else {
+                //return value
+                wallpaparesMutableLiveData.setValue(groupOfWall);
+                categorizeMutableLiveData.setValue(groupOfCat);
+                isLoading.setValue(false);
+
 
             }
 
+        }else{
+            isConnect.setValue(false);
             isLoading.setValue(false);
-
-        } else {
-            //return value
-            isLoading.setValue(false);
-            wallpaparesMutableLiveData.setValue(groupOfWall);
-            categorizeMutableLiveData.setValue(groupOfCat);
-
         }
 
 
@@ -81,17 +91,17 @@ public class ListsViewModel extends AndroidViewModel {
             isConnect.setValue(true);
             callAllCategorys();
             callAllImages(page);
+            isLoading.setValue(false);
         }else{
             isConnect.setValue(false);
-            isSuccess.setValue(false);
+            isLoading.setValue(false);
+
 
         }
 
-        isLoading.setValue(false);
 
 
     }
-
 
     private void callAllImages(int page) {
 
@@ -100,32 +110,26 @@ public class ListsViewModel extends AndroidViewModel {
                 @Override
                 public void onResponse(Call<ResponceImagesList> call, Response<ResponceImagesList> response) {
                     if(response.isSuccessful()){
-                        arrayListMutableLiveData.setValue(response.body());
+                        responceImageList.setValue(response.body());
                         wallpaparesMutableLiveData.setValue(response.body().wallpapares);
                         groupOfWall.clear();
                         groupOfWall.addAll(response.body().wallpapares);
-                        isSuccess.setValue(true);
+                        isSuccessList.setValue(true);
                         if(response.body().has_next){
                             wichPage=response.body().page_next;
                         }
                     }else{
-                        isSuccess.setValue(false);
+                        isSuccessList.setValue(false);
 
 
                     }
-
-//                    if(response.body().wallpapares.isEmpty()){
-//                        isEmpty.setValue(true);
-//                    }else{
-//                        isEmpty.setValue(true);
-//                    }
 
 
                 }
 
                 @Override
                 public void onFailure(Call<ResponceImagesList> call, Throwable t) {
-                    isSuccess.setValue(false);
+                    isSuccessList.setValue(false);
 
 
                 }
@@ -142,10 +146,10 @@ public class ListsViewModel extends AndroidViewModel {
                         categorizeMutableLiveData.setValue(response.body().categorizes);
                         groupOfCat.clear();
                         groupOfCat.addAll(response.body().categorizes);
-                        isSuccess.setValue(true);
+                        isSuccessCat.setValue(true);
                     }else{
 
-                        isSuccess.setValue(false);
+                        isSuccessCat.setValue(false);
                     }
 
 
@@ -154,13 +158,17 @@ public class ListsViewModel extends AndroidViewModel {
 
                 @Override
                 public void onFailure(Call<ResponceCategorys> call, Throwable t) {
-                    isSuccess.setValue(false);
+                    isSuccessCat.setValue(false);
 
 
                 }
             });
 
     }
+
+
+
+
 
 
 }

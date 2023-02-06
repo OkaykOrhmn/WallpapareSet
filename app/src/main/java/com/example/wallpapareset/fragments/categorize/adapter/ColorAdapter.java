@@ -19,9 +19,9 @@ import java.util.ArrayList;
 public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyView>{
 
     private Context context;
-    private ArrayList<Integer> colors;
+    private ArrayList<ColorCat> colors;
 
-    public ColorAdapter(ArrayList<Integer> colors){
+    public ColorAdapter(ArrayList<ColorCat> colors){
         this.colors = colors;
     }
 
@@ -35,12 +35,12 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.MyView>{
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public void onBindViewHolder(@NonNull ColorAdapter.MyView holder, int position) {
-        holder.color.setBackgroundResource(colors.get(position));
+        holder.color.setBackgroundResource(colors.get(position).getColor());
         holder.color.setOnClickListener(view -> {
-//            Bundle bundle = new Bundle();
-//            bundle.putInt("back",colors.get(position));
+            Bundle bundle = new Bundle();
+            bundle.putString("title",colors.get(position).getName());
 
-//            Navigation.findNavController(view).navigate(R.id.action_to_listFragment, bundle);
+            Navigation.findNavController(view).navigate(R.id.action_to_listFragment, bundle);
         });
 
 //        holder.color.setBackgroundResource(colors.get(position));

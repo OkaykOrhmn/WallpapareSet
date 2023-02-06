@@ -42,7 +42,7 @@ public class SuggestionsAdapter extends RecyclerView.Adapter<SuggestionsAdapter.
     public void onBindViewHolder(@NonNull SuggestionsAdapter.MyView holder, int position) {
         Categorize item = suggestions.get(position);
         holder.name.setText(item.title);
-        holder.icon.setImageResource(R.drawable.icons_electronics);
+        holder.icon.setImageResource(R.drawable.stack);
         Log.d(TAG, "onBindViewHolder: "+ item.title);
         holder.icon.setOnClickListener(view -> {
             Bundle bundle = new Bundle();

@@ -27,7 +27,7 @@
                     android:layout_gravity="center"
                     android:elevation="@dimen/_16cdp"
 
-                    />
+                    app:tint="@color/mainBlack" />
 
 
 

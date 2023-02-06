@@ -14,6 +14,7 @@
         <entry key="..\:/Users/Rhmn/Desktop/Wall/app/src/main/res/drawable/home_back.xml" value="0.1625" />
         <entry key="..\:/Users/Rhmn/Desktop/Wall/app/src/main/res/drawable/ic_baseline_crop_free_24.xml" value="0.1625" />
         <entry key="..\:/Users/Rhmn/Desktop/Wall/app/src/main/res/layout-v23/fragment_photo_page.xml" value="0.23007246376811594" />
+        <entry key="..\:/Users/Rhmn/Desktop/Wall/app/src/main/res/layout-v23/fragment_search.xml" value="0.24320652173913043" />
         <entry key="..\:/Users/Rhmn/Desktop/Wall/app/src/main/res/layout/activity_main.xml" value="0.22327898550724637" />
         <entry key="..\:/Users/Rhmn/Desktop/Wall/app/src/main/res/layout/activity_main_screen.xml" value="0.22327898550724637" />
         <entry key="..\:/Users/Rhmn/Desktop/Wall/app/src/main/res/layout/activity_screens.xml" value="0.264" />
@@ -28,7 +29,7 @@
         <entry key="..\:/Users/Rhmn/Desktop/Wall/app/src/main/res/layout/fragment_home.xml" value="0.2157676348547718" />
         <entry key="..\:/Users/Rhmn/Desktop/Wall/app/src/main/res/layout/fragment_list.xml" value="0.264" />
         <entry key="..\:/Users/Rhmn/Desktop/Wall/app/src/main/res/layout/fragment_photo_page.xml" value="0.264" />
-        <entry key="..\:/Users/Rhmn/Desktop/Wall/app/src/main/res/layout/fragment_search.xml" value="0.14791666666666667" />
+        <entry key="..\:/Users/Rhmn/Desktop/Wall/app/src/main/res/layout/fragment_search.xml" value="0.264" />
         <entry key="..\:/Users/Rhmn/Desktop/Wall/app/src/main/res/layout/fragment_setting.xml" value="0.264" />
         <entry key="..\:/Users/Rhmn/Desktop/Wall/app/src/main/res/layout/list_downloads.xml" value="0.4" />
         <entry key="..\:/Users/Rhmn/Desktop/Wall/app/src/main/res/layout/list_layout.xml" value="0.23007246376811594" />

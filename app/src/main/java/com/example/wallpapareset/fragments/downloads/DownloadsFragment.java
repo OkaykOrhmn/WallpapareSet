@@ -47,8 +47,6 @@ public class DownloadsFragment extends Fragment {
     Runnable r;
 
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +61,8 @@ public class DownloadsFragment extends Fragment {
         binding = FragmentDownloadBinding.inflate(inflater, container, false);
         downloadViewModel = new ViewModelProvider(requireActivity()).get(DownloadViewModel.class);
         per = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+
+        binding.includedSetting.progressHorizontal.setVisibility(View.GONE);
 
 //        ////////////////////----------~~ <onBackPress> ~~----------////////////////////
 //
@@ -80,35 +80,32 @@ public class DownloadsFragment extends Fragment {
 
         binding.a.setVisibility(View.INVISIBLE);
 
-         r = () -> {
+        r = () -> {
 
-            if (per){
+            if (per) {
 
                 creatList();
-            }else{
+            } else {
                 askPermision();
             }
 
-            if (empty){
+            if (empty) {
                 binding.alarm.setText(alarm);
                 binding.a.setVisibility(View.INVISIBLE);
                 binding.alarmLayout.setVisibility(View.VISIBLE);
                 Log.d(TAG, "empty: " + empty);
                 binding.spinKit.setVisibility(View.INVISIBLE);
-            }else {
+            } else {
                 binding.a.setVisibility(View.VISIBLE);
                 binding.alarmLayout.setVisibility(View.INVISIBLE);
                 Log.d(TAG, "empty: " + empty);
                 binding.spinKit.setVisibility(View.INVISIBLE);
 
 
-
             }
 
         };
         h.postDelayed(r, 500);
-
-
 
 
         binding.buttonPermisions.setOnClickListener(view -> {
@@ -121,7 +118,30 @@ public class DownloadsFragment extends Fragment {
 
         });
 
+        binding.buttonRefresh.setOnClickListener(view -> {
+            per = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+            if (per) {
 
+                creatList();
+            } else {
+                askPermision();
+            }
+
+            if (empty) {
+                binding.alarm.setText(alarm);
+                binding.a.setVisibility(View.INVISIBLE);
+                binding.alarmLayout.setVisibility(View.VISIBLE);
+                Log.d(TAG, "empty: " + empty);
+                binding.spinKit.setVisibility(View.INVISIBLE);
+            } else {
+                binding.a.setVisibility(View.VISIBLE);
+                binding.alarmLayout.setVisibility(View.INVISIBLE);
+                Log.d(TAG, "empty: " + empty);
+                binding.spinKit.setVisibility(View.INVISIBLE);
+
+
+            }
+        });
 
 
         return binding.getRoot();
@@ -133,9 +153,9 @@ public class DownloadsFragment extends Fragment {
         downloadViewModel.isPermission.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
-                if(aBoolean){
+                if (aBoolean) {
                     creatList();
-                }else {
+                } else {
                     askPermision();
                 }
             }
@@ -165,6 +185,7 @@ public class DownloadsFragment extends Fragment {
         empty = true;
         alarm = "باید مجوز دسترسی به فایل هارا فعال کنید";
         binding.buttonPermisions.setVisibility(View.VISIBLE);
+        binding.buttonRefresh.setVisibility(View.VISIBLE);
         Toast.makeText(getContext(), "برای دانلود عکس باید مجوز دسترسی فعال باشد.", Toast.LENGTH_SHORT).show();
         Log.d(TAG, "3: ");
     }
@@ -181,31 +202,26 @@ public class DownloadsFragment extends Fragment {
         File[] listFile = dir.listFiles();
 
 
-            if (listFile.length == 0){
-                empty = true;
-                alarm = "دانلودی وجود ندارد";
-                binding.buttonPermisions.setVisibility(View.INVISIBLE);
-                Log.d(TAG, "5: ");
-            }else{
-                LinearLayoutManager horizColors = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, true);
-                binding.includedSetting.recAll.setLayoutManager(horizColors);
-                downloadAdapter =  new DownloadAdapter(getActivity(),listFile);
-                binding.includedSetting.recAll.setAdapter(downloadAdapter);
-                downloadAdapter.notifyDataSetChanged();
-                Log.d(TAG, "listFile: -> "+ listFile.length);
-                Log.d(TAG, "6: ");
+        if (listFile.length == 0) {
+            empty = true;
+            alarm = "دانلودی وجود ندارد";
+            binding.buttonPermisions.setVisibility(View.INVISIBLE);
+            binding.buttonRefresh.setVisibility(View.INVISIBLE);
+            Log.d(TAG, "5: ");
+        } else {
+            LinearLayoutManager horizColors = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, true);
+            binding.includedSetting.recAll.setLayoutManager(horizColors);
+            downloadAdapter = new DownloadAdapter(getActivity(), listFile);
+            binding.includedSetting.recAll.setAdapter(downloadAdapter);
+            downloadAdapter.notifyDataSetChanged();
+            Log.d(TAG, "listFile: -> " + listFile.length);
+            Log.d(TAG, "6: ");
 
-                empty = false;
-            }
+            empty = false;
+        }
 
 
-
-
-        
     }
-
-
-
 
 
 }

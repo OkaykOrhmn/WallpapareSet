@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -50,6 +51,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wallpapareset.R;
+import com.example.wallpapareset.api.ResponceSearch;
 import com.example.wallpapareset.database.SqlFav;
 import com.example.wallpapareset.databinding.FragmentPhotoPageBinding;
 import com.example.wallpapareset.fragments.home.ListsViewModel;
@@ -62,6 +64,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -99,6 +102,7 @@ public class PhotoPageFragment extends Fragment {
         photoId = getArguments().getInt("id");
 
         sqlDatabase = new SqlFav(getContext());
+
 
         sqlDatabase.getData();
 

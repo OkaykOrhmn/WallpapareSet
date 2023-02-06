@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.wallpapareset.models.responce.Categorize;
 import com.example.wallpapareset.models.responce.ResponceCategorysList;
 import com.example.wallpapareset.models.responce.Wallpapares;
 import com.example.wallpapareset.repositorys.CategorysListRepository;
@@ -30,6 +31,12 @@ public class CategorizeListViewModel extends AndroidViewModel {
     public MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
     public MutableLiveData<Boolean> isConnect = new MutableLiveData<>();
     public MutableLiveData<Boolean> isSuccess = new MutableLiveData<>();
+    private ArrayList<Wallpapares> groupOfWall = new ArrayList<>();
+    private ArrayList<Categorize> groupOfCat = new ArrayList<>();
+    public boolean isAdd = true;
+    public int wichPage = 1;
+    public int pos = 0;
+
 
 
 
@@ -39,6 +46,35 @@ public class CategorizeListViewModel extends AndroidViewModel {
         this.context = application;
 
     }
+
+    public void getAll(String cat) {
+
+        if (groupOfWall.size() == 0 && groupOfCat.size() == 0) {
+            //call api
+            isLoading.setValue(true);
+            if(Connectivity.isConnected(context)){
+                isConnect.setValue(true);
+                getList(cat,wichPage);
+            }else{
+                isConnect.setValue(false);
+                isSuccess.setValue(false);
+
+            }
+
+            isLoading.setValue(false);
+
+        } else {
+            //return value
+            isLoading.setValue(false);
+            wallpaparesMutableLiveData.setValue(groupOfWall);
+
+        }
+
+
+    }
+
+
+
 
     public void getAllList(String cat, int page){
         if (Connectivity.isConnected(context)){
@@ -63,7 +99,12 @@ public class CategorizeListViewModel extends AndroidViewModel {
                     if(response.isSuccessful()){
                         responceCategorysListMutableLiveData.setValue(response.body());
                         wallpaparesMutableLiveData.setValue(response.body().wallpapares);
+                        groupOfWall.clear();
+                        groupOfWall.addAll(response.body().wallpapares);
                         isSuccess.setValue(true);
+                        if(response.body().has_next){
+                            wichPage=response.body().page_next;
+                        }
                     }else{
                         isSuccess.setValue(false);
 

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".fragments.search.SearchFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/all_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <RelativeLayout
+                android:id="@+id/search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_12cdp"
+                android:layout_marginTop="@dimen/_24cdp"
+                android:layout_marginBottom="@dimen/_8cdp"
+                android:background="@drawable/bottom_navigation_back"
+                app:layout_constraintBottom_toTopOf="@id/rec_sugg"
+                app:layout_constraintRight_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="@dimen/_8cdp"
+                    android:backgroundTint="@color/mainOrange"
+                    android:textColorHint="@color/mainGray"
+                    app:boxCornerRadiusBottomEnd="@dimen/_18cdp"
+                    app:boxCornerRadiusBottomStart="@dimen/_18cdp"
+                    app:boxCornerRadiusTopEnd="@dimen/_18cdp"
+                    app:boxCornerRadiusTopStart="@dimen/_18cdp"
+                    app:boxStrokeColor="@color/outlined_box"
+
+                    app:hintTextColor="@color/mainOrange"
+
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/mainOrange"
+                        android:drawableStart="@drawable/ic_baseline_search_24"
+                        android:drawableTint="@color/outlined_box"
+                        android:gravity="start"
+                        android:hint="جستجو"
+                        android:imeOptions="actionDone"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:scrollHorizontally="true"
+                        android:singleLine="true"
+                        android:textColor="@color/white"
+                        android:textColorHighlight="@color/mainOrange"
+                        android:textColorHint="@color/mainOrange"
+                        />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </RelativeLayout>
+
+
+            <include
+                android:id="@+id/included_all_photos"
+
+                layout="@layout/list_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
+
+
+
+    </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/error_text"
+        style="@style/fontForNormalOrange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="لیست خالی میباشد."
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spin_kit"
+        style="@style/SpinKitView.Large.Circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:SpinKit_Color="@color/mainOrange"
+        android:visibility="invisible"
+        app:SpinKit_Style="Wave" />
+
+
+
+</RelativeLayout>
